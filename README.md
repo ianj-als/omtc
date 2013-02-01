@@ -1,6 +1,8 @@
 Open Machine Translation Core (OMTC)
 ====================================
 
-An open API Standard for Machine Translation Systems.
+This is a reference implementation of OMTC, an open API Standard for Machine Translation Systems.
+
+It is a Java implementation that is Java v1.5 compliant.
 
 Documentation coming soon.
