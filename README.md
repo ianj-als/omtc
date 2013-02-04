@@ -5,6 +5,6 @@ This is a reference implementation of OMTC, an open API Standard for Machine Tra
 
 It is a Java implementation that is Java v1.7 compliant.
 
-Use Maven v3.x to build.
+Use Maven v2.2.1 or newer to build.
 
 Documentation coming soon.
