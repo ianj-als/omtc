@@ -26,6 +26,7 @@ import com.capitati.omtc.core.resources.IPrimaryResource;
 import com.capitati.omtc.core.scheduling.IPriority;
 import com.capitati.omtc.core.scheduling.ITicketObserver;
 import com.capitati.omtc.core.scheduling.TranslationTicket;
+import com.capitati.omtc.core.session.ISession;
 import com.google.common.base.Predicate;
 
 /**
@@ -83,6 +84,7 @@ public abstract class Translator<V> {
    * @throws Exception On an error.
    */
   public abstract TranslationTicket<V> scheduleTranslation(
+      ISession session,
       IPrimaryResource resourceToTranslate,
       IPriority<V> thePriority,
       ITicketObserver<TranslationTicket<V>, V> translationObserver)
@@ -100,6 +102,7 @@ public abstract class Translator<V> {
    * @throws Exception On an error.
    */
   public abstract TranslationTicket<V> scheduleTranslation(
+      ISession session,
       String sourceSentence,
       IPriority<V> thePriority,
       ITicketObserver<TranslationTicket<V>, V> translationObserver)
@@ -116,5 +119,6 @@ public abstract class Translator<V> {
    * @throws Exception
    */
   public abstract Set<TranslationTicket<V>> retrieveTranslations(
+      ISession session,
       Predicate<TranslationTicket<V>> filter) throws Exception;
 }
