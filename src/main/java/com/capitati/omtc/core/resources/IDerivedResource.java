@@ -18,8 +18,19 @@
  */
 package com.capitati.omtc.core.resources;
 
-import java.util.Date;
+import java.util.Set;
 
+/**
+ * This is a representation of a resource that is composed of other resources.
+ * A translation engine is a concrete example of this interface.
+ *
+ * @author ian
+ */
 public interface IDerivedResource extends IResource {
-  Date getLastChanged();
+  /**
+   * Retrieve the resources that have been composed to create a derived resource.
+   *
+   * @return A {@link java.util.Set} whose entries are the composed resources.
+   */
+  Set<IResource> getCreationResources();
 }

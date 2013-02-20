@@ -22,8 +22,32 @@ import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * An abstract and immutable resource. This is anything in OMTC that is used by
+ * a user in an MT system, e.g. documents, translation memories, glossaries etc.
+ *
+ * @author ian
+ */
 public interface IResource {
+  /**
+   * Retrieve the unique identifier for the resource.
+   *
+   * @return A resource's unqiue identifier as a {@link java.util.UUID} object.
+   */
 	UUID getIdentifier();
+
+	/**
+	 * Retrieve the location of the resource. The scheme of the URI shall
+	 * determine how to access the resource; this is implementation defined.
+	 *
+	 * @return A resource's location as a {@link java.net.URI} object.
+	 */
 	URI getURI();
+
+	/**
+	 * Retrieve the creation date of the resource.
+	 *
+	 * @return A resource's creation date as a {@link java.util.Date} object.
+	 */
 	Date getBirthDate();
 }

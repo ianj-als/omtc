@@ -18,6 +18,12 @@
  */
 package com.capitati.omtc.core.resources;
 
+/**
+ * A resource that is created outside of an MT system and is made available
+ * once the MT system has received, e.g. uploading.
+ *
+ * @author ian
+ */
 public interface IPrimaryResource extends IResource {
 
 }
