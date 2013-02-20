@@ -18,8 +18,8 @@
  */
 package com.capitati.omtc.core.session;
 
+import com.capitati.omtc.core.security.IRole;
 import com.capitati.omtc.core.security.IUser;
-import com.capitati.omtc.core.security.Role;
 
 /**
  * A mixin for providing a session the ability to grant and revoke roles from
@@ -37,7 +37,7 @@ public interface IRoleAssignableSession extends IUserRetrievableSession {
    * @param theUser - the user.
    * @throws Exception On any errors that occur during the granting process.
    */
-  void grantRoleToUser(Role theRole, IUser theUser) throws Exception;
+  void grantRoleToUser(IRole theRole, IUser theUser) throws Exception;
 
   /**
    * Revoke a role from a user.
@@ -46,5 +46,5 @@ public interface IRoleAssignableSession extends IUserRetrievableSession {
    * @param theUser - the user.
    * @throws Exception On any errors that occur during the revocation process.
    */
-  void revokeRoleFromUser(Role theRole, IUser theUser) throws Exception;
+  void revokeRoleFromUser(IRole theRole, IUser theUser) throws Exception;
 }

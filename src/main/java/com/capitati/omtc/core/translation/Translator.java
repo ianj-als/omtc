@@ -37,12 +37,10 @@ import com.google.common.base.Predicate;
  *
  * @param <P> - the type of the priority's value.
  */
-public abstract class Translator<V> {
+public abstract class Translator<V, T extends IPrimaryResource, G extends IPrimaryResource> {
   private final IEngine engine;
-  private final Set<IPrimaryResource> glossaries =
-      new HashSet<IPrimaryResource>();
-  private final Set<IPrimaryResource> translationMemories =
-      new HashSet<IPrimaryResource>();
+  private final Set<G> glossaries = new HashSet<G>();
+  private final Set<T> translationMemories = new HashSet<T>();
 
   protected Translator(final IEngine theEngine) {
     super();
@@ -51,8 +49,8 @@ public abstract class Translator<V> {
 
   protected Translator(
       final IEngine theEngine,
-      final Set<IPrimaryResource> theGlossaries,
-      final Set<IPrimaryResource> theTranslationMemories) {
+      final Set<G> theGlossaries,
+      final Set<T> theTranslationMemories) {
     super();
     engine = theEngine;
     glossaries.addAll(theGlossaries);
@@ -63,11 +61,11 @@ public abstract class Translator<V> {
     return engine;
   }
 
-  public Set<IPrimaryResource> getGlossaries() {
+  public Set<G> getGlossaries() {
     return glossaries;
   }
 
-  public Set<IPrimaryResource> getTranslationMemories() {
+  public Set<T> getTranslationMemories() {
     return translationMemories;
   }
 
@@ -83,11 +81,11 @@ public abstract class Translator<V> {
    * @return A translation ticket.
    * @throws Exception On an error.
    */
-  public abstract TranslationTicket<V> scheduleTranslation(
+  public abstract TranslationTicket<V, T, G> scheduleTranslation(
       ISession session,
       IPrimaryResource resourceToTranslate,
       IPriority<V> thePriority,
-      ITicketObserver<TranslationTicket<V>, V> translationObserver)
+      ITicketObserver<TranslationTicket<V, T, G>, V> translationObserver)
   throws Exception;
 
   /**
@@ -101,11 +99,11 @@ public abstract class Translator<V> {
    * @return A translation ticket.
    * @throws Exception On an error.
    */
-  public abstract TranslationTicket<V> scheduleTranslation(
+  public abstract TranslationTicket<V, T, G> scheduleTranslation(
       ISession session,
       String sourceSentence,
       IPriority<V> thePriority,
-      ITicketObserver<TranslationTicket<V>, V> translationObserver)
+      ITicketObserver<TranslationTicket<V, T, G>, V> translationObserver)
   throws Exception;
 
   /**
@@ -118,7 +116,7 @@ public abstract class Translator<V> {
    *
    * @throws Exception
    */
-  public abstract Set<TranslationTicket<V>> retrieveTranslations(
+  public abstract Set<TranslationTicket<V, T, G>> retrieveTranslations(
       ISession session,
-      Predicate<TranslationTicket<V>> filter) throws Exception;
+      Predicate<TranslationTicket<V, T, G>> filter) throws Exception;
 }

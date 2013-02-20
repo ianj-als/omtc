@@ -38,5 +38,5 @@ public interface IUser {
    * 
    * @return The roles of the user.
    */
-  Role[] getRoles();
+  IRole[] getRoles();
 }

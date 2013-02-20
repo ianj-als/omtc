@@ -21,23 +21,25 @@ package com.capitati.omtc.core.scheduling;
 import java.util.Date;
 import java.util.UUID;
 
+import com.capitati.omtc.core.resources.IPrimaryResource;
 import com.capitati.omtc.core.session.ISession;
 import com.capitati.omtc.core.translation.Translator;
 
-public class TranslationTicket<V> extends Ticket<V> {
-  private final Translator<V> translator;
+public class TranslationTicket<V, T extends IPrimaryResource, G extends IPrimaryResource>
+extends Ticket<V> {
+  private final Translator<V, T, G> translator;
 
   public TranslationTicket(
       final UUID theIdentifier,
       final Date theStartDate,
       final ISession theSession,
       final V thePriority,
-      final Translator<V> theTranslator) {
+      final Translator<V, T, G> theTranslator) {
     super(theIdentifier, theStartDate, theSession, thePriority);
     translator = theTranslator;
   }
 
-  public Translator<V> getTranslator() {
+  public Translator<V, T, G> getTranslator() {
     return translator;
   }
 }
