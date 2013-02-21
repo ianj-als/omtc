@@ -18,11 +18,16 @@
  */
 package com.capitati.omtc.core.translation;
 
+import java.net.URI;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import com.capitati.omtc.core.engine.IEngine;
+import com.capitati.omtc.core.resources.IDerivedResource;
 import com.capitati.omtc.core.resources.IPrimaryResource;
+import com.capitati.omtc.core.resources.IResource;
 import com.capitati.omtc.core.scheduling.IPriority;
 import com.capitati.omtc.core.scheduling.ITicketObserver;
 import com.capitati.omtc.core.scheduling.TranslationTicket;
@@ -37,24 +42,61 @@ import com.google.common.base.Predicate;
  *
  * @param <P> - the type of the priority's value.
  */
-public abstract class Translator<V, T extends IPrimaryResource, G extends IPrimaryResource> {
+public abstract class Translator<V, T extends IPrimaryResource, G extends IPrimaryResource>
+implements IDerivedResource {
+  private final UUID identifier;
+  private final URI location;
+  private final Date birthDate;
   private final IEngine engine;
   private final Set<G> glossaries = new HashSet<G>();
   private final Set<T> translationMemories = new HashSet<T>();
 
-  protected Translator(final IEngine theEngine) {
+  protected Translator(
+      final UUID theIdentifier,
+      final URI theLocation,
+      final Date theBirthDate,
+      final IEngine theEngine) {
     super();
+    identifier = theIdentifier;
+    location = theLocation;
+    birthDate = theBirthDate;
     engine = theEngine;
   }
 
   protected Translator(
+      final UUID theIdentifier,
+      final URI theLocation,
+      final Date theBirthDate,
       final IEngine theEngine,
       final Set<G> theGlossaries,
       final Set<T> theTranslationMemories) {
     super();
+    identifier = theIdentifier;
+    location = theLocation;
+    birthDate = theBirthDate;
     engine = theEngine;
     glossaries.addAll(theGlossaries);
     translationMemories.addAll(theTranslationMemories);
+  }
+
+  public UUID getIdentifier() {
+    return identifier;
+  }
+
+  public URI getURI() {
+    return location;
+  }
+
+  public Date getBirthDate() {
+    return birthDate;
+  }
+
+  public Set<IResource> getCreationResources() {
+    final Set<IResource> creationResources = new HashSet<IResource>(glossaries);
+
+    creationResources.addAll(translationMemories);
+
+    return creationResources;
   }
 
   public IEngine getEngine() {
@@ -62,11 +104,11 @@ public abstract class Translator<V, T extends IPrimaryResource, G extends IPrima
   }
 
   public Set<G> getGlossaries() {
-    return glossaries;
+    return new HashSet<G>(glossaries);
   }
 
   public Set<T> getTranslationMemories() {
-    return translationMemories;
+    return new HashSet<T>(translationMemories);
   }
 
   /**
