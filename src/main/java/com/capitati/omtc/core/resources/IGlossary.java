@@ -23,11 +23,11 @@ package com.capitati.omtc.core.resources;
  * 
  * @author ian
  */
-public interface IGlossary extends ITranslationResource {
+public interface IGlossary extends IMultilingualResource {
   /**
    * Retrieve the number of glossary entries.
    *
    * @return The number of entries.
    */
-  int getNumberOfEntries();
+  int getEntryCount();
 }

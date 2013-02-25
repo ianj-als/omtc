@@ -20,7 +20,28 @@ package com.capitati.omtc.core.resources;
 
 import java.io.IOException;
 
+/**
+ * An abstract resource reader. Implementations of this interface should
+ * ensure that the underlying resource is open and ready for reading before any
+ * calls to {@link IResourceReader.read}. 
+ *
+ * @author ian
+ */
 public interface IResourceReader {
+  /**
+   * Read bytes from the underlying resource into the buffer provided.
+   *
+   * @param buffer - the buffer to read resource bytes in to.
+   * @return The number of bytes read, and written into the buffer.
+   * @throws IOException on error reading the underlying resource.
+   */
   int read(byte[] buffer) throws IOException;
+
+  /**
+   * Close the underlying resource associated with this reader.
+   *
+   * @throws IOException on encountering an error closing the underlying
+   * resource.
+   */
   void close() throws IOException;
 }

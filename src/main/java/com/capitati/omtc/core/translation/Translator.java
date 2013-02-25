@@ -42,7 +42,9 @@ import com.google.common.base.Predicate;
  *
  * @param <P> - the type of the priority's value.
  */
-public abstract class Translator<V, T extends IPrimaryResource, G extends IPrimaryResource>
+public abstract class Translator<V,
+                                    T extends IPrimaryResource,
+                                    G extends IPrimaryResource>
 implements IDerivedResource {
   private final UUID identifier;
   private final URI location;
@@ -121,7 +123,7 @@ implements IDerivedResource {
    * @param translationObserver - the observer that listens for the translation
    * task to starting and complete.
    * @return A translation ticket.
-   * @throws Exception On an error.
+   * @throws Exception On a scheduling error.
    */
   public abstract TranslationTicket<V, T, G> scheduleTranslation(
       ISession session,
@@ -139,7 +141,7 @@ implements IDerivedResource {
    * @param translationObserver - the observer that listens for the translation
    * task to starting and complete.
    * @return A translation ticket.
-   * @throws Exception On an error.
+   * @throws Exception On a scheduling error.
    */
   public abstract TranslationTicket<V, T, G> scheduleTranslation(
       ISession session,
@@ -150,13 +152,13 @@ implements IDerivedResource {
 
   /**
    * Retrieve the dispensed translation tickets.
-   * 
+   *
+   * @param session - the invoking session.
    * @param filter - a predicate used to filter the translation tickets.
    * @return A {@link java.util.Set} of currently scheduled translation
    * tickets. It is the implementations responsibility to manage the in-flight
    * collection of tickets.
-   *
-   * @throws Exception
+   * @throws Exception On error retrieving translations.
    */
   public abstract Set<TranslationTicket<V, T, G>> retrieveTranslations(
       ISession session,

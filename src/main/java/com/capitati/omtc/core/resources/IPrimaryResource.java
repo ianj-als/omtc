@@ -20,7 +20,7 @@ package com.capitati.omtc.core.resources;
 
 /**
  * A resource that is created outside of an MT system and is made available
- * once the MT system has received, e.g. uploading.
+ * once the MT system has received it, say, by uploading a file.
  *
  * @author ian
  */

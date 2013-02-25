@@ -23,11 +23,11 @@ package com.capitati.omtc.core.resources;
  *
  * @author ian
  */
-public interface ITranslationMemory extends ITranslationResource {
+public interface ITranslationMemory extends IMultilingualResource {
   /**
    * Retrieves the number of segments from the translation memory.
    *
    * @return The segment count of the translation memory.
    */
-  int getNumberOfSegments();
+  int getSegmentCount();
 }

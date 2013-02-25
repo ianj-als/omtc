@@ -20,7 +20,28 @@ package com.capitati.omtc.core.resources;
 
 import java.io.IOException;
 
+/**
+ * Abstract resource writer. Implementations of this interface should ensure
+ * that the underlying resource is open and ready for writing before any calls
+ * to {@link IResourceWriter.write} are made.
+ *
+ * @author ian
+ */
 public interface IResourceWriter {
+  /**
+   * Write the provided chunk of data to the underlying resource.
+   *
+   * @param chunk - the byte data to write.
+   * @param chunkLength - the number of valid bytes in the buffer.
+   * @throws IOException - on error writing bytes from buffer to the
+   * underlying resource.
+   */
   void write(byte[] chunk, int chunkLength) throws IOException;
+
+  /**
+   * Close any underlying resource.
+   *
+   * @throws IOException - on error closing the underlying resource.
+   */
   void close() throws IOException;
 }

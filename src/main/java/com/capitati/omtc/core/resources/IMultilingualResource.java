@@ -27,7 +27,7 @@ import com.capitati.omtc.core.resources.IPrimaryResource;
  *
  * @author ian
  */
-public interface ITranslationResource extends IPrimaryResource {
+public interface IMultilingualResource extends IPrimaryResource {
   /**
    * Retrieve the source language code.
    *
@@ -42,21 +42,21 @@ public interface ITranslationResource extends IPrimaryResource {
    * @return A {@link java.lang.String} array object that shall list the
    * implementation target language codes.
    */
-  String[] getTargetLanguage();
+  String[] getTargetLanguages();
 
   /**
-   * Retrieve the source language word count.
+   * Retrieve the source language sentence count.
    *
-   * @return The number of words in the source language.
+   * @return The number of sentences in the source language.
    */
-  int getSourceWordCount();
+  int getSourceSentenceCount();
 
   /**
-   * Retrieve the target language word counts.
+   * Retrieve the target language sentence counts.
    *
    * @return A {@link java.util.Map} object whose keys shall be the target
-   * language codes, returned by {@link ITranslationResource.getTargetLanguage},
-   * and values the word count for the target language.
+   * language codes, returned by {@link IMultilingualResource.getTargetLanguage},
+   * and values the sentence count for the target language.
    */
-  Map<String, Integer> getTargetWordCounts();
+  Map<String, Integer> getTargetSentenceCounts();
 }
