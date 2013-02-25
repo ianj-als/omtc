@@ -23,7 +23,7 @@ import java.util.Map;
 import com.capitati.omtc.core.resources.IPrimaryResource;
 
 /**
- * An abstract resource that will be used in some translation operation.
+ * An abstract resource that contains multilingual data.
  *
  * @author ian
  */
