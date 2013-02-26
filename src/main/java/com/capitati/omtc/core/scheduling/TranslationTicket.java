@@ -23,23 +23,23 @@ import java.util.UUID;
 
 import com.capitati.omtc.core.resources.IPrimaryResource;
 import com.capitati.omtc.core.session.ISession;
-import com.capitati.omtc.core.translation.Translator;
+import com.capitati.omtc.core.translation.ITranslator;
 
 public class TranslationTicket<V, T extends IPrimaryResource, G extends IPrimaryResource>
 extends Ticket<V> {
-  private final Translator<V, T, G> translator;
+  private final ITranslator<V, T, G> translator;
 
   public TranslationTicket(
       final UUID theIdentifier,
       final Date theStartDate,
       final ISession theSession,
       final V thePriority,
-      final Translator<V, T, G> theTranslator) {
+      final ITranslator<V, T, G> theTranslator) {
     super(theIdentifier, theStartDate, theSession, thePriority);
     translator = theTranslator;
   }
 
-  public Translator<V, T, G> getTranslator() {
+  public ITranslator<V, T, G> getTranslator() {
     return translator;
   }
 }

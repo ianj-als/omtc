@@ -34,9 +34,9 @@ public interface IEngineAssignableSession
 extends IEngineRetrievableSession, IUserRetrievableSession {
   /**
    * Associate a user with an engine. This association should allow the user
-   * to use the engine for a {@link com.capitati.omtc.core.translation.Translator}
-   * object. Optionally, the implementation should back this association to some
-   * persistent backing store.
+   * to use the engine for a {@link com.capitati.omtc.core.translation.ITranslator}
+   * implementation. Optionally, the implementation should back this association
+   * to some persistent backing store.
    * 
    * @param engine - the engine to grant.
    * @param theUser - the grantee.
@@ -46,8 +46,8 @@ extends IEngineRetrievableSession, IUserRetrievableSession {
 
   /**
    * Dissociate a user from an engine. The user shall no longer be able to use
-   * an engine to build a {@link com.capitati.omtc.core.translation.Translator}
-   * object. Whether the existing translator objects, that use the engine,
+   * an engine to build a {@link com.capitati.omtc.core.translation.ITranslator}
+   * implementation. Whether the existing translator objects, that use the engine,
    * shall be destroyed immediately, or that the engine is no longer available
    * for use in a translator is to implementation defined. Optionally, the
    * implementation should back the dissociation to a persistent backing store.

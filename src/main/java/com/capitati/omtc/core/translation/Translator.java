@@ -25,14 +25,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.capitati.omtc.core.engine.IEngine;
-import com.capitati.omtc.core.resources.IDerivedResource;
 import com.capitati.omtc.core.resources.IPrimaryResource;
 import com.capitati.omtc.core.resources.IResource;
-import com.capitati.omtc.core.scheduling.IPriority;
-import com.capitati.omtc.core.scheduling.ITicketObserver;
-import com.capitati.omtc.core.scheduling.TranslationTicket;
-import com.capitati.omtc.core.session.ISession;
-import com.google.common.base.Predicate;
 
 /**
  * An associative class that brings together an engine, glossaries and
@@ -45,7 +39,7 @@ import com.google.common.base.Predicate;
 public abstract class Translator<V,
                                     T extends IPrimaryResource,
                                     G extends IPrimaryResource>
-implements IDerivedResource {
+implements ITranslator<V, T, G> {
   private final UUID identifier;
   private final URI location;
   private final Date birthDate;
@@ -112,55 +106,4 @@ implements IDerivedResource {
   public Set<T> getTranslationMemories() {
     return new HashSet<T>(translationMemories);
   }
-
-  /**
-   * Schedule a translation for a primary resource. It is implementation
-   * defined which kind of primary resources shall be translated.
-   *
-   * @param session - the invoking session.
-   * @param resourceToTranslate - the primary resource to translate.
-   * @param thePriority - the requested priority.
-   * @param translationObserver - the observer that listens for the translation
-   * task to starting and complete.
-   * @return A translation ticket.
-   * @throws Exception On a scheduling error.
-   */
-  public abstract TranslationTicket<V, T, G> scheduleTranslation(
-      ISession session,
-      IPrimaryResource resourceToTranslate,
-      IPriority<V> thePriority,
-      ITicketObserver<TranslationTicket<V, T, G>, V> translationObserver)
-  throws Exception;
-
-  /**
-   * Schedule a translation for a single sentence.
-   *
-   * @param session - the invoking session.
-   * @param sourceSentence - the sentence to translate.
-   * @param thePriority - the requested priority.
-   * @param translationObserver - the observer that listens for the translation
-   * task to starting and complete.
-   * @return A translation ticket.
-   * @throws Exception On a scheduling error.
-   */
-  public abstract TranslationTicket<V, T, G> scheduleTranslation(
-      ISession session,
-      String sourceSentence,
-      IPriority<V> thePriority,
-      ITicketObserver<TranslationTicket<V, T, G>, V> translationObserver)
-  throws Exception;
-
-  /**
-   * Retrieve the dispensed translation tickets.
-   *
-   * @param session - the invoking session.
-   * @param filter - a predicate used to filter the translation tickets.
-   * @return A {@link java.util.Set} of currently scheduled translation
-   * tickets. It is the implementations responsibility to manage the in-flight
-   * collection of tickets.
-   * @throws Exception On error retrieving translations.
-   */
-  public abstract Set<TranslationTicket<V, T, G>> retrieveTranslations(
-      ISession session,
-      Predicate<TranslationTicket<V, T, G>> filter) throws Exception;
 }
